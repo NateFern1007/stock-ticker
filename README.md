@@ -6,6 +6,7 @@ Creates an applet that allows to track Stock from a variety of sources and compi
 - Python Flask
 - jinja2
 - Python Requests
+- Virtualenv
 
 
 ## Potential Addons:
