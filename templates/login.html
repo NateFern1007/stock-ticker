@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" href="static/bell-64.png">
+        <title>Kehillah Bell</title>
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    </head>
+
+    <body style="padding-top: 40px; padding-bottom: 40px; background-color: #eee;">
+        <div class="container" style="padding-top: 150px">
+            <form class="form-signin" action="{{ url_for('main') }}" method="post" style="margin-bottom: 10px; max-width: 330px; padding: 15px; margin: 0 auto; ">
+                <h2 style="margin-bottom: 10px;">Please sign in</h2>
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input style="margin-bottom: 10px; position: relative; padding: 10px;" type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,85 +1,120 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Stock Ticker</title>
-  </head>
-<style>
-  body {
-    font-family: "Lato", sans-serif;
-}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" href="static/bell-64.png">
+        <title>Stock Ticker</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+        <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
+        <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css'>
+        <!-- <link rel="stylesheet" href="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.min.css') }}">
+        <script defer src="{{ url_for('static', filename='node_modules/fontawesome/dist/js/all.js') }}"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='node_modules/jquery-ui/dist/css/jquery-ui.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
 
-.sidenav {
-    height: 100%;
-    width: 200px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    padding-top: 20px;
-}
+        <style>
+            div#nav {list-style-type: none; margin: 0; padding: 0; overflow: hidden; background-color: black;}
+            div#nav ul li {float: left;}
+            div#nav ul li a {display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none;}
+            div#nav ul li a:hover {background-color: green;}
+            @import "compass/css3";
+            .table-editable {position: relative;}
+            .table-remove {color: #700; cursor: pointer;}
+            .table-up, .table-down {color: #007; cursor: pointer;}
+            .table-add {color: #070; cursor: pointer; position: absolute; top: 8px; right: 0;}
+            div#table tr td.hover:hover {background-color: white}
+            .name-column {width: 40%}
+            .start-column {width: 30%}
+            .end-column {width: 30%}
+            .remove-column {width: 1%; min-width: 50px}
+            .arrow-column {width: 1%; min-width: 100px}
+        </style>
+    </head>
 
-.sidenav a {
-    padding: 6px 6px 6px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-}
+    <!-- https://codepen.io/ashblue/pen/mCtuA -->
+    <body style="background-color: #eee;">
+        <header>
+            <div id="nav" role="navigation">
+                <ul style="list-style-type: none;">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="mailto:someone@example.com">Contact</a></li>
+                    <li><a href="/logout">Log Out</a></li>
+                    <li><a><input type="text" name="search" placeholder="Search.."></a></li>
+                    <script src="{{ url_for('static', filename='js/searchapi.js') }}"></script> 
+                    <!-- Fix this since it does not work -->
+                </ul>
+            </div>
+        </header>
 
-.sidenav a:hover {
-    color: #f1f1f1;
-}
-
-.main {
-    margin-left: 200px; /* Same as the width of the sidenav */
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-</style>
-</head>
-<body>
-
-<div class="sidenav">
-  <a href="https://www.bloomberg.com">Bloomberg</a>
-  <a href="https://www.finance.yahoo.com">Yahoo Finance</a>
-  <a href="https://www.morningstar.com">MorningStar</a>
-</div>
-<div class="main">
-  <h2>Stock Ticker</h2>
-  <input type="search" id="mySearch" placeholder="Loading....">
-  <p>Search for a Stock</p>
-  <button onclick="redirectPage()">Search</button>
-  <p id="symbol"></p>
-
-  <script type="text/JavaScript">
-    function redirectPage()
-    {
-    var text = document.getElementById('mySearch').value
-    var newurl="https://www.bloomberg.com/markets/api/quote-page/"+text+"%3AUS?";
-    window.location.href = newurl;
-    }
-    </script>
-<div class="quote">
-  <h2>Stock Ticker</h2>
-  <input type="search" id="mySearch" placeholder="Loading....">
-  <p>Search for a Stock</p>
-  <button onclick="basicQuote()">Search</button>
-  <p id="symbol"></p>
-
-</div>    
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
-    <script>
-      // You can also require other files to run in this process
-      require('./renderer.js')
-    </script>
-  </body>
+        <div id="container" style="padding: 30px" >
+            <div id="table" class="table-editable">
+                <span class="table-add glyphicon glyphicon-plus"></span>
+                <table class="table">
+                                <tr>
+                                    <th class="symbol-column">Symbol</th>
+                                    <th class="name-column">Name</th>
+                                    <th class="date-column">Latest-Date</th>
+                                    <th class="primaryExchange-column">Exchange</th>
+                                    <th class="open-column">Open</th>
+                                    <th class="close-column">Close</th>
+                                    <th class="high-column">High</th>
+                                    <th class="low-column">Low</th>
+                                    <th class="latestPrice-column">Latest-Price</th>
+                                    <th class="delayedPrice-column">Delayed-Price</th>
+                                    <th class="previousClose-column">Previous-Close</th>
+                                    <th class="change-column">Change</th>
+                                    <th class="changePercent-column">Change-Percent</th>
+                                    <th class="close-jan-1">Close on Jan 1</th>
+                                    <th class="cummulative-gain-loss">Cummulitive Gain/Loss</th>
+                                    <th class="cummulative-gain-loss-percentage">Cummulitive Gain/Loss Percentage</th>
+                                    <th class="cummulative-gain-loss-jan-1">Cummulative Gain/Loss % from Jan 1"</th>
+                                    <th class="remove-column"></th>
+                                    <th class="arrow-column"></th>
+                                </tr>
+                                <!-- This is our clonable table line -->
+                                <tr class="hide">
+                                    <td class="hover symbol-column" contenteditable="true"></td>
+                                    <td class="hover name-column" contenteditable="true"></td>
+                                    <td class="hover date-column" contenteditable="true"></td>
+                                    <td class="hover primaryExchange-column" contenteditable="true"></td>
+                                    <td class="hover open-column" contenteditable="true"></td>
+                                    <td class="hover close-column" contenteditable="true"></td>
+                                    <td class="hover high-column" contenteditable="true"></td>
+                                    <td class="hover low-column" contenteditable="true"></td>
+                                    <td class="hover latestPrice-column" contenteditable="true"></td>
+                                    <td class="hover delayedPrice-column" contenteditable="true"></td>
+                                    <td class="hover previousClose-column" contenteditable="true"></td>
+                                    <td class="hover change-column" contenteditable="true"></td>
+                                    <td class="hover changePercent-column" contenteditable="true"></td>
+                                    <td class="hover changePercent-column" contenteditable="true"></td>
+                                    <td class="hover changePercent-column" contenteditable="true"></td>
+                                    <td class="hover changePercent-column" contenteditable="true"></td>
+                                    <td class="remove-column">
+                                    <span class="table-remove glyphicon glyphicon glyphicon-remove"></span>
+                                    </td>
+                                    <td class="arrow-column">
+                                    <span class="table-up glyphicon glyphicon glyphicon-arrow-up"></span>
+                                    <span class="table-down glyphicon glyphicon glyphicon-arrow-down"></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+            <div class="btn-group">
+                <button id="export-btn" class="btn btn-primary">Save</button>
+                <button id="import-btn" class="btn btn-primary" onclick="location.href='/update';">Update</button>
+            </div>
+            <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+            <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+            <script src='https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js'></script>
+            <script src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore.js'></script>
+            <!-- <script src="{{ url_for('static', filename='node_modules/jquery/dist/js/jquery.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='node_modules/fontawesome/dist/js/fontawesome.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='node_modules/jquery-ui/dist/js/jquery-ui.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='node_modules/underscore/dist/js/underscore.js') }}"></script> -->
+            <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+        </div>
+        <p><center>There are some functionalities that are broken such as the search bar, will be fixed in an update to come</center></p>
+    </body>
 </html>
