@@ -1,29 +1,14 @@
 # Stock-Ticker
-Creates an applet that allows to track Stock from a variety of sources and compiles them into a single app
-
+The purpose of this app is to take data from Stock API and consolidate it into an easy to use program that allows for better tracking of personal investments. 
 ## Requirements:
-- Python 3.6 
-- Python Flask
-- jinja2
-- Python Requests
-- Virtualenv
-
-
-## Potential Addons:
-- nodejs 5.6.0
-- electronjs 5.11.0
+- Python 3.6+
 
 ## Sources for Infomation
-- Yahoo Finance
-- Google Finance
-# Potential Sources:
-- Morningstar
-- Open Bloomberg API
+- Alphavantage (as it is free currently)
 
 ## TO-DO:
 - Add potential graphing to look at trends
 - Comparisons to other stocks and indexes
 
-### Made Nathan who has an intrest in understanding more about stocks and the importance of trading on the stock market
 
 
