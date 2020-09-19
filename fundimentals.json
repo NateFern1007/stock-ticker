@@ -1,0 +1,17 @@
+{
+  "name": "VANGUARD LARGE-CAP ETF",
+  "id": "VV:US",
+  "shortName": "VANGUARD LAR-C E",
+  "openPrice": 159.23,
+  "price": 157.94,
+  "lowPrice": 157.8,
+  "lowPrice52Week": 100.9,
+  "percentChange1Day": -0.4099000096321106,
+  "dividend": null,
+  "lastDividendReported": "0.6249",
+  "earningsPerShare": null,
+  "earningsAnouncement": null,
+  "currentManagementFee": 0.04,
+  "marketCap": 19211875000,
+  "lastUpdate": "2020-09-16T20:15:00.000Z"
+}

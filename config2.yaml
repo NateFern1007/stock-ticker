@@ -1,0 +1,13 @@
+stockType:
+  MutualFunds:
+    - GTLLX
+
+  ExchangeTradedFunds:
+    - XLK
+
+  CommonStock:
+    - V
+    - MGLN
+    - BA
+
+

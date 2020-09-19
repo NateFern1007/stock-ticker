@@ -1,0 +1,55 @@
+Stocks:
+- VV:US
+- V:US
+- FNCL:US
+- HEDJ:US
+- MGLN:US
+- GILD:US
+- XLK:US
+- SNOW:US
+
+
+Fundimentals:
+- "name"
+- "id"
+- "shortName"
+- "openPrice"
+- "price"
+- "lowPrice"
+- "lowPrice52Week"
+- "percentChange1Day"
+- "dividend"
+- "lastDividendReported"
+- "earningsPerShare"
+- "earningsAnouncement"
+- "currentManagementFee"
+- "marketCap"
+- "lastUpdate"
+
+Earnings:
+  - "earningsPerShare"
+  - "earningsAnouncement"
+  - "nextEarningsPeriod"
+  - "nextEarningsPeriodEnd"
+
+
+Ratios:
+  - "priceToBookRatio"
+  - "priceToSalesRatio"
+  - "priceEarningsRatio"
+
+Returns:
+  - "totalReturn1Year"
+  - "totalReturn3Month"
+  - "totalReturn3Year"
+  - "totalReturn5Year"
+  - "totalReturnYtd"
+
+
+
+
+
+
+
+
+
